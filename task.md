@@ -1529,16 +1529,16 @@ const cormorant = Cormorant_Garamond({
 - [x] Test mobile responsiveness (375px, 390px, 414px)
 - [x] Test all filter combinations on catalog
 
-### Phase 12 — Vercel Deployment
-- [ ] Set all environment variables in Vercel
+### Phase 12 — Netlify Deployment (Completed)
+- [x] Set all environment variables in Netlify
 - [x] Run `prisma db push` on production DB (Supabase)
 - [x] Seed SizeChart table on production DB
-- [ ] Deploy to Vercel production
-- [ ] Verify all API routes work in production
-- [ ] Verify Supabase Storage public URLs
-- [ ] Verify size chart images load from `/public/size-charts/` in production
-- [ ] Check SSL, custom domain if applicable
-- [ ] Final Lighthouse audit
+- [x] Deploy to Netlify production
+- [x] Verify all API routes work in production
+- [x] Verify Supabase Storage public URLs
+- [x] Verify size chart images load from `/public/size-charts/` in production
+- [ ] Check SSL, custom domain if applicable (Pending)
+- [ ] Final Lighthouse audit (Pending)
 
 ---
 
