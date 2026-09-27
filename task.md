@@ -1633,31 +1633,28 @@ const cormorant = Cormorant_Garamond({
 
 ---
 
-*Last updated — 2026-09-23 07:13 AM (IST)*
+*Last updated — 2026-09-28*
 
 ---
 
 ## 📌 Session Progress — Resume Here
 
-**Date:** 2026-09-23  
+**Date:** 2026-09-28  
 **Status:** Paused — user resting
 
 ### What was completed this session:
-- ✅ Fixed Supabase DB connection (`pg` Pool hostname parsing bug)
-- ✅ Fixed admin login — reset password for `admin@vinsith.lk` (`Vinsith@2025`)
-- ✅ Tested full customer order flow end-to-end (API + frontend)
-- ✅ Tested all admin CRUD operations (products, themes, spaces, panels)
-- ✅ Fixed bank account edit/delete (was missing — built `BankAccountForm`, edit page, delete action)
-- ✅ Fixed order status filter buttons not filtering (Next.js 15 async `searchParams` bug)
-- ✅ Fixed bank account edit page crash (Next.js 15 async `params` bug)
-- ✅ Updated Prisma schema — `onDelete: SetNull` on Order→BankAccount FK
-- ✅ All Phase 11 testing items complete including mobile responsiveness
+- ✅ Switched deployment platform from Vercel to Netlify due to phone verification restrictions.
+- ✅ Configured Netlify build settings (`netlify.toml` and `@netlify/plugin-nextjs`).
+- ✅ Fixed Prisma Client imports (`@/prisma/generated/client`) to resolve Netlify build failures caused by custom output paths.
+- ✅ Successfully deployed to production on Netlify!
+- ✅ Configured environment variables (Database URLs, Supabase Keys, NextAuth) on Netlify dashboard.
+- ✅ Tested and verified the Admin Login and Sign Out flow on the live URL.
 
 ### What to do next:
-1. `[x]` Test mobile responsiveness (375px, 390px, 414px) — Phase 11
-2. `[ ]` Phase 12 — Vercel Deployment (set env vars, prisma migrate, deploy, verify)
+1. `[ ]` Review Phase 22 (Future Features) and decide what to build next (e.g., Customer Order Tracking, Email Notifications, etc.).
+2. `[ ]` Consider setting up a Custom Domain when ready.
 
 ### Admin credentials:
-- **URL:** `/admin/login`
+- **Live URL:** `https://vinsithwa.netlify.app/admin/login`
 - **Email:** `admin@vinsith.lk`
 - **Password:** `Vinsith@2025`
