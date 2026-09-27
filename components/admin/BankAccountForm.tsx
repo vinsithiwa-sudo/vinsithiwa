@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createBankAccountAction, updateBankAccountAction } from "@/app/actions/admin.actions";
-import { BankAccount } from "@prisma/client";
+import { BankAccount } from "@/prisma/generated/client";
 
 interface BankAccountFormProps {
   initialData?: BankAccount;

@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/prisma/generated/client";
 
 // ─────────────────────────────────────────────
 // Prisma Model Types (for use across the app)

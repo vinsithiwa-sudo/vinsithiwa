@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import FadeUp from "@/components/ui/FadeUp";
 import ProductCard from "@/components/product/ProductCard";
 import { Filter, X } from "lucide-react";
-import type { Theme, Space, Panel } from "@prisma/client";
+import type { Theme, Space, Panel } from "@/prisma/generated/client";
 
 const GOLD = "#C9A84C";
 const DARK = "#1a1208";

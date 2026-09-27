@@ -1,4 +1,4 @@
-import { OrderStatus, Prisma } from "@prisma/client";
+import { OrderStatus, Prisma } from "@/prisma/generated/client";
 import prisma from "@/lib/prisma";
 import { generateOrderId } from "@/lib/utils";
 import type { OrderFormValues } from "@/lib/validations";

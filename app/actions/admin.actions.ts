@@ -9,7 +9,7 @@ import {
 } from "@/services/products.service";
 import { updateOrderStatus as updateOrderStatusService } from "@/services/orders.service";
 import type { ProductFormValues } from "@/lib/validations";
-import { OrderStatus } from "@prisma/client";
+import { OrderStatus } from "@/prisma/generated/client";
 import { upsertSetting, createTheme, updateTheme, deleteTheme, createSubtheme, updateSubtheme, deleteSubtheme, createSpace, updateSpace, deleteSpace, createPanel, updatePanel, deletePanel, createBankAccount, updateBankAccount, deleteBankAccount, toggleBankAccount } from "@/services/admin.service";
 
 export async function createProductAction(data: ProductFormValues) {

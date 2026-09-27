@@ -9,7 +9,7 @@ import { createProductAction, updateProductAction } from "@/app/actions/admin.ac
 import { Plus, Trash2, ArrowLeft, Upload, X } from "lucide-react";
 import Link from "next/link";
 import ImageUploader from "./ImageUploader";
-import { Theme, Subtheme, Space, Panel } from "@prisma/client";
+import { Theme, Subtheme, Space, Panel } from "@/prisma/generated/client";
 import { SIZE_CHART_LABELS, SIZE_CHARTS } from "@/lib/size-charts";
 import Image from "next/image";
 

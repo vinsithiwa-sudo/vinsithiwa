@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { OrderStatus } from "@prisma/client";
+import { OrderStatus } from "@/prisma/generated/client";
 import { updateOrderStatusAction } from "@/app/actions/admin.actions";
 import { ORDER_STATUS_MAP } from "@/lib/utils";
 

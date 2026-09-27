@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import FadeUp from "@/components/ui/FadeUp";
 import ProductCard from "@/components/product/ProductCard";
-import type { Panel } from "@prisma/client";
+import type { Panel } from "@/prisma/generated/client";
 
 const GOLD = "#C9A84C";
 const DARK = "#1a1208";
