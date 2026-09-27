@@ -1,0 +1,30 @@
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
+
+export default withAuth(
+  function proxy(req) {
+    const isAuth = !!req.nextauth.token;
+    const isAuthPage = req.nextUrl.pathname.startsWith("/admin/login");
+
+    if (isAuthPage) {
+      if (isAuth) {
+        return NextResponse.redirect(new URL("/admin/dashboard", req.url));
+      }
+      return null;
+    }
+
+    if (!isAuth) {
+      return NextResponse.redirect(new URL("/admin/login", req.url));
+    }
+  },
+  {
+    callbacks: {
+      authorized: () => true, // Let the middleware function handle the logic
+    },
+    secret: process.env.NEXTAUTH_SECRET || "vinsithiwa_super_secret_key_2026_dev",
+  }
+);
+
+export const config = {
+  matcher: ["/admin/:path*"],
+};

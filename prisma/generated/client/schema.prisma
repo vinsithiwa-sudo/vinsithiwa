@@ -1,0 +1,253 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// ADMIN
+// ─────────────────────────────────────────────
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+
+  @@map("admin_users")
+}
+
+// ─────────────────────────────────────────────
+// CATALOG TAXONOMY
+// ─────────────────────────────────────────────
+
+model Panel {
+  id       String    @id @default(cuid())
+  name     String    @unique // "1 Piece", "2 Pieces", etc.
+  count    Int
+  products Product[]
+
+  @@map("panels")
+}
+
+model Theme {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  subthemes Subtheme[]
+  products  Product[]
+
+  @@map("themes")
+}
+
+model Subtheme {
+  id       String    @id @default(cuid())
+  name     String
+  slug     String
+  themeId  String
+  theme    Theme     @relation(fields: [themeId], references: [id], onDelete: Cascade)
+  products Product[]
+
+  @@unique([themeId, slug])
+  @@map("subthemes")
+}
+
+model Space {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  icon        String?
+  description String?
+  color       String?
+  products    Product[]
+
+  @@map("spaces")
+}
+
+// ─────────────────────────────────────────────
+// PRODUCTS
+// ─────────────────────────────────────────────
+
+model Product {
+  id           String         @id @default(cuid())
+  title        String
+  slug         String         @unique
+  designNumber String?        @unique
+  description  String         @db.Text
+  basePrice    Decimal        @db.Decimal(10, 2)
+  mainImage    String
+  images       ProductImage[]
+
+  themeId String?
+  theme   Theme?  @relation(fields: [themeId], references: [id])
+
+  subthemeId String?
+  subtheme   Subtheme? @relation(fields: [subthemeId], references: [id])
+
+  spaceId String?
+  space   Space?  @relation(fields: [spaceId], references: [id])
+
+  panelId String?
+  panel   Panel?  @relation(fields: [panelId], references: [id])
+
+  sizes  ProductSize[]
+  frames ProductFrame[]
+
+  isAvailable Boolean  @default(true)
+  isFeatured  Boolean  @default(false)
+  tags        String[]
+
+  seoTitle          String?
+  seoDescription    String?
+  sizeChartTemplate String?
+
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("products")
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  url       String
+  alt       String?
+  order     Int     @default(0)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_images")
+}
+
+model ProductSize {
+  id        String  @id @default(cuid())
+  label     String // e.g. "60x40 cm", "90x60 cm"
+  price     Decimal @db.Decimal(10, 2)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_sizes")
+}
+
+model ProductFrame {
+  id        String  @id @default(cuid())
+  label     String // e.g. "No Frame", "Black Frame", "White Frame"
+  price     Decimal @db.Decimal(10, 2)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_frames")
+}
+
+// ─────────────────────────────────────────────
+// CUSTOMERS & ORDERS
+// ─────────────────────────────────────────────
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  whatsapp  String
+  address   String
+  city      String
+  orders    Order[]
+  createdAt DateTime @default(now())
+
+  @@map("customers")
+}
+
+model Order {
+  id      String @id @default(cuid())
+  orderId String @unique // VIN-1001 format
+
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  items         OrderItem[]
+  deliveryNotes String?
+  totalAmount   Decimal     @db.Decimal(10, 2)
+
+  bankAccountId String?
+  bankAccount   BankAccount? @relation(fields: [bankAccountId], references: [id], onDelete: SetNull)
+
+  status          OrderStatus @default(PENDING_PAYMENT)
+  paymentVerified Boolean     @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAYMENT_RECEIVED
+  PROCESSING
+  READY_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+model OrderItem {
+  id            String  @id @default(cuid())
+  orderId       String
+  order         Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product @relation(fields: [productId], references: [id])
+  selectedSize  String?
+  selectedFrame String?
+  quantity      Int     @default(1)
+  unitPrice     Decimal @db.Decimal(10, 2)
+
+  @@map("order_items")
+}
+
+// ─────────────────────────────────────────────
+// PAYMENT & SETTINGS
+// ─────────────────────────────────────────────
+
+model BankAccount {
+  id          String  @id @default(cuid())
+  bankName    String
+  accountName String
+  accountNo   String
+  branch      String?
+  isActive    Boolean @default(true)
+  orders      Order[]
+
+  @@map("bank_accounts")
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+
+  @@map("settings")
+}
+
+// ─────────────────────────────────────────────
+// CUSTOM ORDER REQUESTS
+// ─────────────────────────────────────────────
+
+model CustomRequest {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String
+  whatsapp    String
+  description String
+  budget      String?
+  spaceType   String?
+  status      String   @default("new") // new | reviewing | quoted | closed
+  createdAt   DateTime @default(now())
+
+  @@map("custom_requests")
+}

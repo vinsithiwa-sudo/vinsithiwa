@@ -1,0 +1,31 @@
+export const SIZE_CHARTS: Record<string, string> = {
+  "1-piece-horizontal": "/size-charts/1-piece-horizontal.png",
+  "1-piece-vertical": "/size-charts/1-piece-vertical.png",
+  "1-piece-vertical-small": "/size-charts/1-piece-vertical-small.png",
+  "2-piece-horizontal": "/size-charts/2-piece-horizontal.png",
+  "2-piece-square": "/size-charts/2-piece-square.png",
+  "3-piece-large": "/size-charts/3-piece-large.png",
+  "3-piece-small": "/size-charts/3-piece-small.png",
+  "4-piece-layout-1": "/size-charts/4-piece-layout-1.png",
+  "4-piece-layout-2": "/size-charts/4-piece-layout-2.png",
+  "4-piece-layout-3": "/size-charts/4-piece-layout-3.png",
+  "4-piece-layout-4": "/size-charts/4-piece-layout-4.png",
+  "4-piece-layout-5": "/size-charts/4-piece-layout-5.png",
+  "5-piece-standard": "/size-charts/5-piece-standard.png",
+};
+
+export const SIZE_CHART_LABELS: Record<string, string> = {
+  "1-piece-horizontal": "1 Piece - Horizontal",
+  "1-piece-vertical": "1 Piece - Vertical",
+  "1-piece-vertical-small": "1 Piece - Vertical Small",
+  "2-piece-horizontal": "2 Piece - Horizontal",
+  "2-piece-square": "2 Piece - Square",
+  "3-piece-large": "3 Piece - Large",
+  "3-piece-small": "3 Piece - Small",
+  "4-piece-layout-1": "4 Piece - Layout 1",
+  "4-piece-layout-2": "4 Piece - Layout 2",
+  "4-piece-layout-3": "4 Piece - Layout 3",
+  "4-piece-layout-4": "4 Piece - Layout 4",
+  "4-piece-layout-5": "4 Piece - Layout 5",
+  "5-piece-standard": "5 Piece - Standard",
+};
