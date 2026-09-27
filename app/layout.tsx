@@ -25,6 +25,9 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://vinsithiwa.vercel.app"
+  ),
   title: "Vinsith Interior Wall Art",
   description: "Premium Wall Art Catalog & Manual Order Platform",
 };
